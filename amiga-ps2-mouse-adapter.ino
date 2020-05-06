@@ -125,6 +125,7 @@ void setup() {
   blink();
 }
 
+int led = 0;
 void loop() {
   ps2SendCommand(PS2_CMD_READ_DATA);
   byte b1 = ps2Receive();
@@ -159,6 +160,12 @@ void loop() {
   // as quickly as we can. 
   int steps = max(stepsX, stepsY);
   while (steps-- > 0) {
+      // Show some activity...
+      if (steps % 4 == 0) {
+        digitalWrite(LED, led);
+        led = 1 - led;
+      }
+      
       if (stepsY > 0) {
         digitalWrite(P_AMIGA_V_PULSE, p[posY]);
         digitalWrite(P_AMIGA_VQ_PULSE, pq[posY]);
@@ -175,5 +182,5 @@ void loop() {
 
       // 50 micros is just a guess, seems to work out fine.
       delayMicroseconds(50);
-  }  
+  }
 }
