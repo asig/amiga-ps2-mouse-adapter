@@ -81,10 +81,10 @@ void setupMouse() {
   ps2Receive(); // read and ignore device ID
 
   // Amiga generates 200 impulses/inch, which is  
-  // 0.78 impulses/mm, so let's go with a resolution
-  // of 1 count per mm.
+  // 7.87 impulses/mm, so let's go with a resolution
+  // of 8 count per mm.
   ps2SendCommand(PS2_CMD_SET_RESOLUTION);
-  ps2SendCommand(PS2_RES_1_CNT_PER_MM);
+  ps2SendCommand(PS2_RES_8_CNT_PER_MM);
 
   // Switch to polling.
   ps2SendCommand(PS2_CMD_SET_REMOTE_MODE);
@@ -180,7 +180,7 @@ void loop() {
         stepsX--;
       }
 
-      // 50 micros is just a guess, seems to work out fine.
-      delayMicroseconds(50);
+      // 100 micros is just a guess, seems to work out fine.
+      delayMicroseconds(100);
   }
 }
